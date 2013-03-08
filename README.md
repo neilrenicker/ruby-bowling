@@ -1,6 +1,8 @@
-# Bowling Kata Rules
+# Ruby Bowling Kata
 
-The [KataBowling](http://codingdojo.org/cgi-bin/wiki.pl?KataBowling) challenge, based on a game of standard 10-pin American bowling.
+My implementation of the [KataBowling](http://codingdojo.org/cgi-bin/wiki.pl?KataBowling) challenge, based on a game of standard 10-pin American bowling and coded with Ruby.
+
+## Bowling Rules:
 
 * 10 pins
 * 10 turns (frames) for the bowler
@@ -10,4 +12,4 @@ The [KataBowling](http://codingdojo.org/cgi-bin/wiki.pl?KataBowling) challenge, 
 * Strike knocks down 10 on roll 1. Score is 10 + next 2 throw scores
 * Spare or strike on last turn (frame 10), gets 1 or 2 bonus balls. Count as same turn.
 
-Break it into parts!
+*Break it into parts!*
