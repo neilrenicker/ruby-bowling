@@ -2,10 +2,11 @@ require 'pry'
 
 class Bowling
 
-  attr_accessor :turns
+  attr_accessor :turns, :scorer
 
   def initialize(*turns)
     @turns = turns
+    @scorer = Hash.new
   end
 
   def turn
@@ -28,8 +29,10 @@ class Bowling
     turn.first == 10
   end
 
-  # def next_turn
-  #   turns.shift
+  # def miss
+  #   if is_miss? == true
+  #     self.scorer = { "turn1" => sum }
+  #   end
   # end
 
 end
