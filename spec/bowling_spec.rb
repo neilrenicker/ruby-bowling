@@ -38,14 +38,24 @@ describe Bowling do
     game.is_spare?.should be_false
   end
 
-  xit "should not run miss if a strike or a spare is rolled" do
-    game = Bowling.new([10,0])
-    game.miss.should == nil
+  it "should be able to know the score of the following turn" do
+    game = Bowling.new([5,3], [1,4], [5,5])
+    game.following_turn.should == [1,4]
   end
 
-  xit "should add the score of a miss to the scorer if a miss is rolled" do
+  it "should score a miss by adding the turns two rolls" do
     game = Bowling.new([5,3])
-    game.scorer.should == {"turn1"=>8}
+    game.score.should == 8
+  end
+
+  it "should score a spare by adding 10 to the first roll of the next turn" do
+    game = Bowling.new([5,5],[4,1])
+    game.score.should == 14
+  end
+
+    it "should score a strike by adding 10 to both rolls of the next turn" do
+    game = Bowling.new([10,0],[4,1])
+    game.score.should == 15
   end
 
 end
