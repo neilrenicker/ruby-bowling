@@ -1,12 +1,13 @@
-require 'pry'
-
 class Bowling
 
-  attr_accessor :turns, :scorer
+  attr_accessor :turns, :bonus
 
   def initialize(*turns)
     @turns = turns
-    @scorer = Hash.new
+    if turns.count == 11
+      @bonus = turns.last
+      turns.pop
+    end
   end
 
   def turn
@@ -33,7 +34,7 @@ class Bowling
     turn[0] == 10
   end
 
-  def score
+  def turn_score
     if is_miss?
       sum
     elsif is_spare?
@@ -41,6 +42,15 @@ class Bowling
     else is_strike?
       10 + following_turn[0] + following_turn[1]
     end
+  end
+
+  def scorer
+    score = 0
+    while turns != []
+      score = score + turn_score
+      turns.shift
+    end
+    score
   end
 
 end
