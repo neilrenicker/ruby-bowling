@@ -63,12 +63,6 @@ describe Bowling do
     game.turn_score.should == 15
   end
 
-  it "should score consecutive strikes correctly" do
-    game = Bowling.new([10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,10])
-    game.turn_score.should == 30
-    game.scorer.should == 300
-  end
-
   it "should process all but the last turn from the turns array" do
     game = Bowling.new([10,0],[4,1])
     game.scorer
@@ -95,4 +89,20 @@ describe Bowling do
     game.scorer.should == 70
   end
 
+  it "should score an entire game of misses correctly" do
+    game = Bowling.new([3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0])
+    game.scorer.should == 30
+  end
+
+  it "should score an entire game of spares correctly" do
+    game = Bowling.new([3,7],[3,7],[3,7],[3,7],[3,7],[3,7],[3,7],[3,7],[3,7],[3,7],[10,0])
+    game.scorer.should == 137
+  end
+
+  it "should score consecutive strikes correctly" do
+    game = Bowling.new([10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,10])
+    game.turn_score.should == 30
+    game.scorer.should == 300
+  end
+  
 end

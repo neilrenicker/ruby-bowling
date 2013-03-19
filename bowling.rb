@@ -39,7 +39,6 @@ class Bowling
   end
 
   def strike_scorer
-    is_strike?
     if following_turn[0] == 10 && second_turn == nil
       20 + bonus[0]
     elsif following_turn[0] == 10 && second_turn[0] == 10
