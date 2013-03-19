@@ -104,5 +104,10 @@ describe Bowling do
     game.turn_score.should == 30
     game.scorer.should == 300
   end
-  
+
+  it "should score a game consecutive strikes ending in a miss correctly" do
+    game = Bowling.new([10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[5,3])
+    game.scorer.should == 261
+  end
+
 end
