@@ -80,7 +80,6 @@ class Bowling
     end
     if bonus
       score = score + sum + bonus[0] + bonus[1]
-      score
     else
       score = score + sum
     end
