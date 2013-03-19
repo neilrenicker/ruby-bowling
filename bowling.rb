@@ -38,12 +38,24 @@ class Bowling
     turn[0] == 10
   end
 
+  def ninth_strike_followed_by_strike?
+    following_turn[0] == 10 && second_turn == nil
+  end
+
+  def strike_followed_by_two_strikes?
+    following_turn[0] == 10 && second_turn[0] == 10
+  end
+
+  def strike_followed_by_strike?
+    following_turn[0] == 10
+  end
+
   def strike_scorer
-    if following_turn[0] == 10 && second_turn == nil
+    if ninth_strike_followed_by_strike?
       20 + bonus[0]
-    elsif following_turn[0] == 10 && second_turn[0] == 10
+    elsif strike_followed_by_two_strikes?
       30
-    elsif following_turn[0] == 10
+    elsif strike_followed_by_strike?
       20 + second_turn[0]
     else
       10 + following_turn[0] + following_turn[1]
