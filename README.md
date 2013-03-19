@@ -1,22 +1,18 @@
 # Ruby Bowling Kata
 
-My implementation of the [KataBowling](http://codingdojo.org/cgi-bin/wiki.pl?KataBowling) challenge, based on a game of standard 10-pin American bowling and coded with Ruby.
+My implementation in Ruby of the [KataBowling](http://codingdojo.org/cgi-bin/wiki.pl?KataBowling) challenge, based on a game of standard 10-pin American bowling.
 
 ## Bowling Rules:
 
-* 10 turns (frames) for the bowler
-* 2 tries per turn
-* If fails to knock both down, score for that frame is sum of rolls
-* Spare: knocks down 10 on roll #2. Score is 10 + next throw score
-* Strike: knocks down 10 on roll #1. Score is 10 + next 2 throw scores
-* Spare or strike on last turn (frame 10), gets 1 or 2 bonus balls. Count as same turn.
+* 10 turns allowed per game.
+* 2 rolls allowed per turn.
+* If bowler fails to knock both down, score for that turn is sum of its rolls rolls.
+* Spare: bowler knocks down 10 on roll #2. Score is 10 + next roll score.
+* Strike: bowler knocks down 10 on roll #1. Score is 10 + next 2 throw scores.
+* Spare or strike on last turn (turn 10), gets 1 or 2 bonus rolls respectively. These bonus rolls count toward the 10th turn.
 
-## Suggested Test Cases:
+## My Approach:
 
-*(When scoring "X" indicates a strike, "/" indicates a spare, "-" indicates a miss)*
+I chose to structure the turns as an array of arrays. Since the kata doesn't require checking for invalid roll sequences, I simply check for a bonus based on the array count. If a bonus exists, it gets defined as `bonus`, removed from the turns, and added on to the final turn score.
 
-* "XXXXXXXXXXXX" (12 rolls: 12 strikes) = 10+10+10 + 10+10+10 + 10+10+10 + 10+10+10 + 10+10+10 + 10+10+10 + 10+10+10 + 10+10+10 + 10+10+10 + 10+10+10 = 300
-* "9-9-9-9-9-9-9-9-9-9-" (20 rolls: 10 pairs of 9 and miss) = 9 + 9 + 9 + 9 + 9 + 9 + 9 + 9 + 9 + 9 = 90
-* "5/5/5/5/5/5/5/5/5/5/5" (21 rolls: 10 pairs of 5 and spare, with a final 5) = 10+5 + 10+5 + 10+5 + 10+5 + 10+5 + 10+5 + 10+5 + 10+5 + 10+5 + 10+5 = 150
-
-*Break it into parts!*
+To deal with consecutive strike scoring, I have a `strike_scorer` method that looks ahead at the following two turns, and checks to see if they are also strikes. My main `scorer` method is where the magic happens - a `while` loop iterates through each turn in the array except the 10th turn, then the 10th turn is dealt with based on whether a `bonus` exists or not.
