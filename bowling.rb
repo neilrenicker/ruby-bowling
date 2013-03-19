@@ -18,6 +18,10 @@ class Bowling
     turns[1]
   end
 
+  def second_turn
+    turns[2]
+  end
+
   def sum
     turn[0] + turn[1]
   end
@@ -34,23 +38,41 @@ class Bowling
     turn[0] == 10
   end
 
+  def strike_scorer
+    is_strike?
+    if following_turn[0] == 10 && second_turn == nil
+      20 + bonus[0]
+    elsif following_turn[0] == 10 && second_turn[0] == 10
+      30
+    elsif following_turn[0] == 10
+      20 + second_turn[0]
+    else
+      10 + following_turn[0] + following_turn[1]
+    end
+  end
+
   def turn_score
     if is_miss?
       sum
     elsif is_spare?
       10 + following_turn[0]
     else is_strike?
-      10 + following_turn[0] + following_turn[1]
+      strike_scorer
     end
   end
 
   def scorer
     score = 0
-    while turns != []
+    while turns.length > 1
       score = score + turn_score
       turns.shift
     end
-    score
+    if bonus
+      score = score + sum + bonus[0] + bonus[1]
+      score
+    else
+      score = score + sum
+    end
   end
 
 end

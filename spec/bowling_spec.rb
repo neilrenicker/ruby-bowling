@@ -39,7 +39,7 @@ describe Bowling do
   end
 
   it "should be able to know the score of the following turn" do
-    game = Bowling.new([5,3], [1,4], [5,5])
+    game = Bowling.new([5,3],[1,4],[5,5])
     game.following_turn.should == [1,4]
   end
 
@@ -53,15 +53,26 @@ describe Bowling do
     game.turn_score.should == 14
   end
 
+  it "should properly score multiple consecutive spares" do
+    game = Bowling.new([5,5],[5,5],[5,5],[5,5])
+    game.scorer.should == 55
+  end
+
   it "should score a strike by adding 10 to both rolls of the next turn" do
     game = Bowling.new([10,0],[4,1])
     game.turn_score.should == 15
   end
 
-  it "should remove each item from the turns array after it has been processed" do
+  it "should score consecutive strikes correctly" do
+    game = Bowling.new([10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,10])
+    game.turn_score.should == 30
+    game.scorer.should == 300
+  end
+
+  it "should process all but the last turn from the turns array" do
     game = Bowling.new([10,0],[4,1])
     game.scorer
-    game.turns.should == []
+    game.turns.should == [[4,1]]
   end
 
   it "should output a final score of 20 for a game rolled with a strike and a 4,1 spare" do
@@ -77,6 +88,11 @@ describe Bowling do
   it "should separate out the bonus turn from the list of turns" do
     game = Bowling.new([10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,10])
     game.bonus.should == [10,10]
+  end
+
+  it "should add the bonus to the last turn if a spare is rolled" do
+    game = Bowling.new([3,3],[3,3],[3,3],[3,3],[3,3],[3,3],[3,3],[3,3],[3,3],[0,10],[6,0])
+    game.scorer.should == 70
   end
 
 end
