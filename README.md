@@ -1,6 +1,6 @@
 # Ruby Bowling Kata
 
-My implementation in Ruby of the [KataBowling](http://codingdojo.org/cgi-bin/wiki.pl?KataBowling) challenge, based on a game of standard 10-pin American bowling.
+My implementation in Ruby of the [KataBowling](http://codingdojo.org/cgi-bin/wiki.pl?KataBowling) challenge, based on a game of standard 10-pin American bowling. It successfully scores a game of bowling if a valid turn sequence is passed in.
 
 ## Bowling Rules:
 
